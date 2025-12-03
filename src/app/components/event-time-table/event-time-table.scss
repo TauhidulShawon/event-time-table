@@ -1,0 +1,294 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: Arial, sans-serif;
+     background-color: #f5f5f5;
+     overflow: hidden;
+ }
+
+ .event-timetable-container {
+     width: 100%;
+     height: 100vh;
+     display: flex;
+     flex-direction: column;
+ }
+
+ .header {
+     padding: 1.5rem 2rem;
+     background-color: #fff;
+     border-bottom: 2px solid #e0e0e0;
+ }
+
+ .title {
+     font-size: 1.75rem;
+     font-weight: 600;
+     color: #333;
+ }
+
+ // ============ Week Tabs ============ 
+ .week-tabs {
+     display: flex;
+     align-items: stretch;
+     background-color: #fff;
+     border-bottom: 2px solid #e0e0e0;
+     height: 80px;
+ }
+
+ .nav-arrow {
+     width: 50px;
+     background-color: #424242;
+     color: white;
+     border: none;
+     cursor: pointer;
+     font-size: 1.2rem;
+     transition: background-color 0.3s;
+ }
+
+ .nav-arrow:hover {
+     background-color: #616161;
+ }
+
+ .tabs-container {
+     flex: 1;
+     overflow-x: auto;
+ }
+
+ .tabs-scroll {
+     display: flex;
+     min-width: max-content;
+ }
+
+ .tab {
+     min-width: 180px;
+     padding: 1rem 1.5rem;
+     cursor: pointer;
+     border-right: 1px solid #e0e0e0;
+     transition: background-color 0.3s;
+     text-align: center;
+ }
+
+ .tab:hover {
+     background-color: #f5f5f5;
+ }
+
+ .tab.active {
+     background-color: #e3f2fd;
+     border-bottom: 3px solid #2196f3;
+ }
+
+ .tab-day {
+     font-weight: 600;
+     color: #333;
+     margin-bottom: 0.25rem;
+ }
+
+ .tab-date {
+     font-size: 0.85rem;
+     color: #666;
+ }
+
+ // ============== Venue Section ==============
+ .venue-section {
+     padding: 1rem 2rem;
+     background-color: #fff;
+     border-bottom: 1px solid #e0e0e0;
+ }
+
+ .venue-header {
+     font-weight: 600;
+     color: #333;
+     margin-bottom: 0.75rem;
+ }
+
+ .venue-list {
+     display: flex;
+     gap: 1rem;
+ }
+
+ .venue-item {
+     padding: 0.5rem 1.5rem;
+     border-radius: 4px;
+     color: #fff;
+     font-weight: 500;
+     background-color: #9e9e9e;
+ }
+
+ //================= Timetable ============
+
+ .timetable-wrapper {
+     flex: 1;
+     position: relative;
+     overflow: hidden;
+     background-color: #fff;
+ }
+
+ .scroll-indicator {
+     position: absolute;
+     z-index: 10;
+     color: #666;
+     display: flex;
+     align-items: center;
+     gap: 0.25rem;
+     font-size: 0.75rem;
+     pointer-events: none;
+ }
+
+ .scroll-indicator.left {
+     left: 90px;
+     top: 50%;
+     transform: translateY(-50%);
+     flex-direction: column;
+ }
+
+ .scroll-indicator.right {
+     right: 20px;
+     top: 50%;
+     transform: translateY(-50%);
+     flex-direction: column;
+ }
+
+ .scroll-indicator.vertical {
+     right: 10px;
+     top: 50%;
+     transform: translateY(-50%);
+     flex-direction: column;
+     gap: 0.5rem;
+ }
+
+ .scroll-label {
+     writing-mode: vertical-rl;
+     text-orientation: mixed;
+     font-size: 0.7rem;
+ }
+
+ .timetable-container {
+     display: flex;
+     height: 100%;
+     overflow-x: auto;
+     overflow-y: hidden;
+ }
+
+ .timetable-container::-webkit-scrollbar {
+     height: 12px;
+ }
+
+ .timetable-container::-webkit-scrollbar-thumb {
+     background: #bdbdbd;
+     border-radius: 6px;
+ }
+
+//============= Time Column ===============
+ .time-column {
+     position: sticky;
+     left: 0;
+     z-index: 5;
+     background-color: #fff;
+     border-right: 2px solid #e0e0e0;
+     min-width: 80px;
+ }
+
+ .time-header {
+     height: 60px;
+     background-color: #f5f5f5;
+     border-bottom: 2px solid #e0e0e0;
+ }
+
+ .time-slots {
+     overflow-y: auto;
+     height: calc(100% - 60px);
+ }
+
+ .time-slot {
+     height: 60px;
+     border-bottom: 1px solid #e0e0e0;
+     padding: 0.25rem 0.5rem;
+ }
+
+ .time-label {
+     font-size: 0.875rem;
+     color: #666;
+     font-weight: 500;
+ }
+
+ //================ Venues Grid =====================
+ 
+ .venues-grid {
+     display: flex;
+     flex: 1;
+ }
+
+ .venue-column {
+     min-width: 200px;
+     width: 200px;
+     border-right: 1px solid #e0e0e0;
+ }
+
+ .venue-header-cell {
+     height: 60px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #fff;
+     font-weight: 600;
+     border-bottom: 2px solid #e0e0e0;
+     background-color: #9e9e9e;
+ }
+
+ .event-area {
+     position: relative;
+     overflow-y: auto;
+     height: calc(100% - 60px);
+ }
+
+ .event-area::-webkit-scrollbar {
+     width: 8px;
+ }
+
+ .event-area::-webkit-scrollbar-thumb {
+     background: #bdbdbd;
+     border-radius: 4px;
+ }
+
+ .grid-lines {
+     position: relative;
+ }
+
+ .grid-line {
+     height: 60px;
+     border-bottom: 1px solid #e0e0e0;
+     background-color: #fafafa;
+ }
+
+ .events-container {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     padding: 0 0.5rem;
+ }
+
+ .event-card {
+     position: absolute;
+     left: 0.5rem;
+     right: 0.5rem;
+     background-color: #757575;
+     color: white;
+     border-radius: 4px;
+     padding: 0.5rem;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ }
+
+ .event-time {
+     font-size: 0.75rem;
+     font-weight: 600;
+     margin-bottom: 0.25rem;
+ }
+
+ .event-title {
+     font-size: 0.85rem;
+     font-weight: 500;
+ }

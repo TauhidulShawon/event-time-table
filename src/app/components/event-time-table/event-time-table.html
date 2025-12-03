@@ -1,0 +1,104 @@
+<div class="event-timetable-container">
+
+    <div class="header">
+        <h1 class="title" style="text-align: center;">Event Time Table</h1>
+    </div>
+
+    <div class="week-tabs">
+        <button class="nav-arrow left" (click)="previousWeek()">
+            <span>
+                < </span>
+        </button>
+
+        <div class="tabs-container">
+            <div class="tabs-scroll">
+                <div *ngFor="let day of weekDays; let i = index" class="tab" [class.active]="selectedTabIndex === i"
+                    (click)="selectTab(i)">
+                    <div class="tab-day">{{ getDayName(day) }}</div>
+                    <div class="tab-date">Date: {{ day | date }}</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="nav-arrow right" (click)="nextWeek()">
+            <span> > </span>
+        </button>
+    </div>
+
+
+    <div class="timetable-wrapper">
+
+        <div class="timetable-container" (scroll)="onHorizontalScroll($event)">
+
+            <div class="time-column sticky">
+                <div class="time-header"></div>
+                <div class="time-slots">
+                    <div *ngFor="let slot of timeSlots" class="time-slot" [style.height.px]="slotHeight">
+                        <span class="time-label">{{ slot.time }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="venues-grid">
+                <div *ngFor="let venue of venues" class="venue-column">
+
+                    <div class="venue-header-cell" [style.background-color]="venue.color">
+                        {{ venue.name }}
+                    </div>
+
+                    <div class="event-area">
+
+                        <div class="grid-lines">
+                            <div *ngFor="let slot of timeSlots" class="grid-line" [style.height.px]="slotHeight">
+                            </div>
+                        </div>
+
+                        <div class="events-container">
+                            <div *ngFor="let event of getEventsForDateAndVenue(weekDays[selectedTabIndex], venue.id)"
+                                class="event-card" [style.top.px]="getEventPosition(event).top"
+                                [style.height.px]="getEventPosition(event).height"
+                                style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100px;">
+                                <div class="event-time">{{ event.startTime }} - {{ event.endTime }}</div>
+                                <div class="event-title">{{ event.title }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const eventAreas = document.querySelectorAll('.event-area');
+    eventAreas.forEach(area => {
+        area.addEventListener('scroll', (e) => {
+            const scrollTop = e.target.scrollTop;
+            eventAreas.forEach(otherArea => {
+                if (otherArea !== e.target) {
+                    otherArea.scrollTop = scrollTop;
+                }
+            });
+
+            const timeSlots = document.querySelector('.time-slots');
+            timeSlots.scrollTop = scrollTop;
+        });
+    });
+
+    const timeSlots = document.querySelector('.time-slots');
+    timeSlots.addEventListener('scroll', (e) => {
+        const scrollTop = e.target.scrollTop;
+        eventAreas.forEach(area => {
+            area.scrollTop = scrollTop;
+        });
+    });
+
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        });
+    });
+</script>
